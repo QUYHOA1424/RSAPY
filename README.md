@@ -19,7 +19,7 @@ Bài tập lớn - Mật mã và An ninh mạng
     - Nội dung chính: Mã hóa văn bản (Tiếng Việt có dấu) với RSA và khóa tự sinh (1024 bits)
       
 ## 2. Giới thiệu chung bài tâp lớn
-    s- Trong hiện thực RSA của các bạn, giả sử các số nguyên tố lớn ít nhất phải 500 bits(nhưng có thể lớn hơn) và các bạn phải viết các hàm sau:
+    - Trong hiện thực RSA của các bạn, giả sử các số nguyên tố lớn ít nhất phải 500 bits(nhưng có thể lớn hơn) và các bạn phải viết các hàm sau:
     - Tìm số nguyên tố lớn khi cho số lượng bit của số nguyên tố lớn cần tìm.
     - Tính ước số lớn nhất khi cho hai số nguyên lớn.
     - Tính toán khóa giải mã d khi cho khoá mã hóa e và hai số nguyên tố lớn.
