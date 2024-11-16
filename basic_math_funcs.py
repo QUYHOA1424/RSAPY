@@ -1,20 +1,27 @@
 # Calculate a^b mod m
 def powMod(a, b, m):
-	x = []
+
+	# b = b0 + b1*2^1+ b2*2^2+...+bn*2^n
+	# Store the cofficients (b0,b1,...,bn) into x
+	x = [] 
 	while b != 0:
-		x.append(b & 1)
-		b = b >> 1
+		x.append(b & 1) # get the right most bit
+		b = b >> 1 # discard the right most bit
+	
+	# Store a^(2^i) % m values in po, 0 <= i <= sz, sz is number of cofficients of b
 	sz = len(x)
-	po = [a%m]
+	po = [a % m] # start the list of a^(2^i) % m with a % m
 	for i in range(1,sz):
 		p = (po[i-1]*po[i-1])%m
 		po.append(p)
+
+	# Calculate a^b mod m by product of the (a^(2^i))^bi mod m values
 	r = 1
 	for i in range(sz):
 		if(x[i] != 0):
 			r*= po[i]
 			r%= m
-	return r
+	return r % m
 
 def gcd(a, b):
     while b:
