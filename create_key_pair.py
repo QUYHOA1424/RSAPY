@@ -47,13 +47,15 @@ def generate_rsa_keypair(bit_length = 500):
     n = p * q
     phi = (p - 1) * (q - 1)
     # Choose  e randomly coprime with phi
+    e = None
     if gcd(65537, phi) == 1:
         e = 65537 # ususally use
     else:
         for e in range(3, phi - 1):
             if gcd(e, phi) == 1:
                 break
-        raise ValueError('Unable to find an e coprime with phi.')
+        if e is None:
+            raise ValueError('Unable to find an e coprime with phi.')
     # Compute d (the modular inverse of e)
     d = mod_inverse(e, phi)
     # Return the keypair
@@ -61,9 +63,33 @@ def generate_rsa_keypair(bit_length = 500):
     private_key = (d, n)
     return public_key, private_key
 
+# test with small value
+def generate_rsa_keypair_test(p, q, bit_length = 5):
+    while p == q:
+        q = create_large_Prime(bit_length)
+    n = p * q
+    phi = (p - 1) * (q - 1)
+    e = None
+    for e in range(3, phi - 1):
+        if gcd(e, phi) == 1:
+            break
+    if e is None:
+        raise ValueError('Unable to find an e coprime with phi.')
+    d = mod_inverse(e, phi)
+    public_key = (e, n)
+    private_key = (d, n)
+    return public_key, private_key
+
 # Example
 if __name__ == "__main__":
+    # test
+    public_key, private_key = generate_rsa_keypair_test(5, 11, 5)
+    print("Test result: ")
+    print("    Public key:", public_key)
+    print("    Private key:", private_key)
+    # actual use
     public_key, private_key = generate_rsa_keypair(512)
-    print("Public key:", public_key)
-    print("Private key:", private_key)
+    print("Result: ")
+    print("    Public key:", public_key)
+    print("    Private key:", private_key)
         
