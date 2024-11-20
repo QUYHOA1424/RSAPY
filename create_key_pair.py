@@ -1,4 +1,6 @@
 import random
+from basic_math_funcs import *
+import argparse
 
 def is_Prime(n, loop_times = 10):
     if n <= 1:
@@ -81,15 +83,19 @@ def generate_rsa_keypair_test(p, q, bit_length = 5):
     return public_key, private_key
 
 # Example
+
+def main():
+    parser = argparse.ArgumentParser(description="Generate RSA key pair.")
+    parser.add_argument("-l","--length", type=int, default=500, help="The length of the key in bits.")
+    args = parser.parse_args()
+    bit_length = args.length
+    public_key, private_key = generate_rsa_keypair(bit_length)
+    f0 = open("Data/public_key.txt", "w")
+    f1 = open("Data/private_key.txt", "w")
+    f0.write(str(public_key[0]) + "\n" + str(public_key[1]))
+    f1.write(str(private_key[0]) + "\n" + str(private_key[1]))
+
+
+
 if __name__ == "__main__":
-    # test
-    public_key, private_key = generate_rsa_keypair_test(5, 11, 5)
-    print("Test result: ")
-    print("    Public key:", public_key)
-    print("    Private key:", private_key)
-    # actual use
-    public_key, private_key = generate_rsa_keypair(512)
-    print("Result: ")
-    print("    Public key:", public_key)
-    print("    Private key:", private_key)
-        
+    main()

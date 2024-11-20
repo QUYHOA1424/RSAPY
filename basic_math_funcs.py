@@ -46,12 +46,12 @@ def normalize_residue(x, mod):
 
 # return e^-1 (mod phi)
 def mod_inverse(e, phi):
-    gcd, x, y = extended_gcd(e, phi)
-    if gcd != 1:
-        raise Exception('Modular inverse does not exist')
-    else:
-	    x = normalize_residue(x, phi)
-	    return x
+	gcd, x, y = extended_gcd(e, phi)
+	if gcd != 1:
+		raise Exception('Modular inverse does not exist')
+	else:
+		x = normalize_residue(x, phi)
+		return x
 
 if __name__ == "__main__":
 	a = 38454
